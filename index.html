@@ -42,19 +42,21 @@
       localStorage.setItem(key, JSON.stringify(prev));
     }
 
-    function show() {
-      const keys = Object.keys(localStorage).filter(k => k.startsWith("viewed_"));
-      if (keys.length === 0) {
-        document.getElementById("log").textContent = "まだ記録はありません。";
-        return;
-      }
-      const lines = keys.map(k => {
-        const times = JSON.parse(localStorage.getItem(k));
-        return k + ":
-  - " + times.join("\n  - ");
-      });
-      document.getElementById("log").textContent = lines.join("\n\n");
-    }
+	function show() {
+	  const keys = Object.keys(localStorage).filter(k => k.startsWith("viewed_"));
+	  const lines = keys.map(k => {
+	    try {
+	      const times = JSON.parse(localStorage.getItem(k) || '[]');
+	      return k + ":\n  - " + times.join("\\n  - ");
+	    } catch (e) {
+	      return k + ": エラー（保存形式が不正）";
+	    }
+	  });
+
+	  document.getElementById("log").textContent = lines.length
+	    ? lines.join("\\n\\n")
+	    : "まだ記録はありません。";
+	}
   </script>
 </body>
 </html>

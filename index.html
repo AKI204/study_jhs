@@ -2,21 +2,23 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>画像閲覧記録</title>
+  <title>画像閲覧記録（履歴対応）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  <h2>画像を見て記録する</h2>
+  <h2>画像を見て記録する（履歴形式）</h2>
 
   <ul>
     <li>
-      <button onclick="openAndRecord('animal1', './image1.jpg')">animal1.jpg を開く</button>
+      <button onclick="openAndRecord('小4上 反復練習⑪ 1(1) No.1', 'https://drive.google.com/uc?export=view&id=1qjtBNIUjaWy0BV8SAQNYTv9hcjxWvlji
+')">小4上 反復練習⑪ 1(1) No.1</button>
     </li>
     <li>
-      <button onclick="openAndRecord('flower1', './image2.jpg')">flower1.jpg を開く</button>
+      <button onclick="openAndRecord('小4上 反復練習⑪ 1(1) No.2', 'https://drive.google.com/uc?export=view&id=1d6xgSqVuqmxuFAvOYAfPpqStKCBBQbOb
+')">小4上 反復練習⑪ 1(1) No.2</button>
     </li>
   </ul>
 
@@ -25,8 +27,11 @@
 
   <script>
     function openAndRecord(id, url) {
-      const now = new Date().toISOString();
-      localStorage.setItem('viewed_' + id, now);
+      const now = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+      const key = 'viewed_' + id;
+      const prev = JSON.parse(localStorage.getItem(key) || '[]');
+      prev.push(now);
+      localStorage.setItem(key, JSON.stringify(prev));
       window.open(url, '_blank');
     }
 
@@ -36,8 +41,12 @@
         document.getElementById("log").textContent = "まだ記録はありません。";
         return;
       }
-      const lines = keys.map(k => k + ": " + localStorage.getItem(k));
-      document.getElementById("log").textContent = lines.join("\n");
+      const lines = keys.map(k => {
+        const times = JSON.parse(localStorage.getItem(k));
+        return k + ":
+  - " + times.join("\n  - ");
+      });
+      document.getElementById("log").textContent = lines.join("\n\n");
     }
   </script>
 </body>

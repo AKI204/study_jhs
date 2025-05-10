@@ -1,47 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>ヒント集</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .log { margin-top: 20px; white-space: pre-wrap; background: #f0f0f0; padding: 10px; }
-  </style>
+  <meta charset="UTF-8" />
+  <title>画像閲覧記録</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  <h2>ヒントを選択</h2>
+  <h2>画像を見て記録する</h2>
 
   <ul>
     <li>
-      <a href="https://drive.google.com/file/d/1qjtBNIUjaWy0BV8SAQNYTv9hcjxWvlji/view?usp=drivesdk"
-         target="_blank"
-         onclick="recordView('反復練習⑪ 1(1) No.1')">▶ 小4上 反復練習⑪ 1(1) No.1</a>
+      <button onclick="openAndRecord('animal1', './image1.jpg')">animal1.jpg を開く</button>
     </li>
     <li>
-      <a href="https://drive.google.com/file/d/1d6xgSqVuqmxuFAvOYAfPpqStKCBBQbOb/view?usp=drivesdk"
-         target="_blank"
-         onclick="recordView('反復練習⑪ 1(1) No.2')">▶ 小4上 反復練習⑪ 1(1) No.2</a>
+      <button onclick="openAndRecord('flower1', './image2.jpg')">flower1.jpg を開く</button>
     </li>
   </ul>
 
-  <button onclick="showLog()">記録を確認する</button>
-
-  <div class="log" id="logArea"></div>
+  <button onclick="show()">記録を見る</button>
+  <pre id="log"></pre>
 
   <script>
-    function recordView(imageId) {
+    function openAndRecord(id, url) {
       const now = new Date().toISOString();
-      localStorage.setItem("ヒント閲覧 - " + imageId, now);
+      localStorage.setItem('viewed_' + id, now);
+      window.open(url, '_blank');
     }
 
-    function showLog() {
+    function show() {
       const keys = Object.keys(localStorage).filter(k => k.startsWith("viewed_"));
       if (keys.length === 0) {
-        document.getElementById("logArea").textContent = "まだ記録はありません。";
+        document.getElementById("log").textContent = "まだ記録はありません。";
         return;
       }
       const lines = keys.map(k => k + ": " + localStorage.getItem(k));
-      document.getElementById("logArea").textContent = lines.join("\n");
+      document.getElementById("log").textContent = lines.join("\n");
     }
   </script>
 </body>

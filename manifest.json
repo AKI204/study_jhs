@@ -1,0 +1,8 @@
+{
+  "name": "画像閲覧記録",
+  "short_name": "記録ビューア",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}

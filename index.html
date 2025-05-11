@@ -2,30 +2,30 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>画像閲覧記録（完成版）</title>
+  <title>ヒント集</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  <h2>画像を見て記録する（完全版・改行・履歴・Brave対応）</h2>
+  <h2>ヒント集</h2>
 
   <ul>
     <li>
-      <a href="https://drive.google.com/uc?export=view&id=1qjtBNIUjaWy0BV8SAQNYTv9hcjxWvlji"
-         onclick="record('animal1')"
+      <a href="https://drive.google.com/uc?export=view&id=1lfTGAMfm1P5f8wJBS4BCyAKDI0zPW9i8"
+         onclick="record('小4上 練習問題⑫ 1(1) No.1')"
          target="_blank"
          rel="noopener noreferrer">
-         animal1.jpg を開く
+         小4上 練習問題⑫ 1(1) No.1
       </a>
     </li>
     <li>
-      <a href="https://drive.google.com/uc?export=view&id=1d6xgSqVuqmxuFAvOYAfPpqStKCBBQbOb"
-         onclick="record('flower1')"
+      <a href="https://drive.google.com/uc?export=view&id=1YfVSpmhGflwOmeWFTumHrrfbTN81GPfj"
+         onclick="record('小4上 練習問題⑫ 1(1) No.2')"
          target="_blank"
          rel="noopener noreferrer">
-         flower1.jpg を開く
+         小4上 練習問題⑫ 1(1) No.2
       </a>
     </li>
   </ul>
@@ -36,7 +36,7 @@
   <script>
     function record(id) {
       const now = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
-      const key = 'viewed_' + id + '_v2';
+      const key = 'viewed_' + id;
       const prev = JSON.parse(localStorage.getItem(key) || '[]');
       prev.push(now);
       localStorage.setItem(key, JSON.stringify(prev));

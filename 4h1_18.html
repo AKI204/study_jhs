@@ -401,14 +401,14 @@
   <script>
     function record(id) {
       const now = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
-      const key = 'viewed_' + id + '_LOG_17';
+      const key = 'viewed_' + id + '_LOG_18';
       const prev = JSON.parse(localStorage.getItem(key) || '[]');
       prev.push(now);
       localStorage.setItem(key, JSON.stringify(prev));
     }
 
     function show() {
-      const keys = Object.keys(localStorage).filter(k => k.endsWith('_LOG_17'));
+      const keys = Object.keys(localStorage).filter(k => k.endsWith('_LOG_18'));
       const lines = keys.map(k => {
         const times = JSON.parse(localStorage.getItem(k));
         return `<strong>${k}</strong><br>  - ${times.join("<br>  - ")}`;
